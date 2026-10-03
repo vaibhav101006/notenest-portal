@@ -133,9 +133,9 @@
       department: "BCA",
       semester: "Semester 3",
       type: "Lecture Notes",
-      uploader: "Siddharth Sharma",
-      uploaderAvatar: "SS",
-      uploaderEmail: "siddharth.s@college.edu",
+      uploader: "Manya Shah",
+      uploaderAvatar: "MS",
+      uploaderEmail: "manya.shah@college.edu",
       date: "02 Feb 2026",
       fileType: "pdf",
       fileSize: "3.5 MB",
@@ -211,13 +211,13 @@
 
   const DEFAULT_USER = {
     isLoggedIn: true,
-    name: "Siddharth Sharma",
-    email: "siddharth.s@college.edu",
+    name: "Manya Shah",
+    email: "manya.shah@college.edu",
     department: "Computer Engineering",
     semester: "Semester 4",
     college: "National Institute of Engineering",
     bio: "Passionate coding student, DSA enthusiast, and collaborative notes contributor. Always striving for top GPA!",
-    avatar: "SS",
+    avatar: "MS",
     profileViews: 128
   };
 
@@ -255,7 +255,20 @@
     },
     getUser() {
       const data = localStorage.getItem('notenest_user');
-      return data ? JSON.parse(data) : DEFAULT_USER;
+      if (!data) {
+        localStorage.setItem('notenest_user', JSON.stringify(DEFAULT_USER));
+        return { ...DEFAULT_USER };
+      }
+      try {
+        const u = JSON.parse(data);
+        if (u.name === 'Siddharth Sharma' || !u.name) {
+          u.name = 'Manya Shah';
+          u.avatar = 'MS';
+          u.email = 'manya.shah@college.edu';
+          localStorage.setItem('notenest_user', JSON.stringify(u));
+        }
+        return u;
+      } catch (e) { return { ...DEFAULT_USER }; }
     },
     saveUser(user) {
       localStorage.setItem('notenest_user', JSON.stringify(user));

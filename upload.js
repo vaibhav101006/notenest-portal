@@ -18,6 +18,15 @@
     const selectedFilePreview = document.getElementById('selectedFilePreview');
     const removeFileBtn = document.getElementById('removeFileBtn');
     const resetBtn = document.getElementById('resetUploadFormBtn');
+    const nameInput = document.getElementById('uploadStudentName');
+    const emailInput = document.getElementById('uploadEmail');
+
+    if (nameInput && window.NoteNest && window.NoteNest.user && window.NoteNest.user.name) {
+      nameInput.value = window.NoteNest.user.name;
+    }
+    if (emailInput && window.NoteNest && window.NoteNest.user && window.NoteNest.user.email) {
+      emailInput.value = window.NoteNest.user.email;
+    }
 
     if (dropzone && fileInput) {
       dropzone.addEventListener('click', () => fileInput.click());
