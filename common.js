@@ -342,6 +342,22 @@
       }
     });
 
+    // Click outside to close drawer
+    document.addEventListener('click', (e) => {
+      if (drawer && drawer.classList.contains('open')) {
+        if (!drawer.contains(e.target) && !hamburger.contains(e.target)) {
+          drawer.classList.remove('open');
+        }
+      }
+      const filterSidebar = document.getElementById('filterSidebar');
+      const mobileFilterBtn = document.getElementById('mobileFilterToggleBtn');
+      if (filterSidebar && filterSidebar.classList.contains('open')) {
+        if (!filterSidebar.contains(e.target) && (!mobileFilterBtn || !mobileFilterBtn.contains(e.target))) {
+          filterSidebar.classList.remove('open');
+        }
+      }
+    });
+
     renderUserAuthSlot();
     setupNotifications();
   }
