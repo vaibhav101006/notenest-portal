@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NoteNest - Full Technical Reference Manual (HTML, CSS & JS)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 18mm 14mm 18mm 14mm;
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1e293b;
+      background: #ffffff;
+      line-height: 1.55;
+      font-size: 11pt;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .cover-page {
+      page-break-after: always;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+      margin-bottom: 20px;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: #2563eb;
+      color: #ffffff;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 10pt;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .cover-title {
+      font-size: 28pt;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .cover-subtitle {
+      font-size: 14pt;
+      color: #475569;
+      font-weight: 500;
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .cover-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 540px;
+      width: 100%;
+      text-align: left;
+      margin-top: 20px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+
+    .cover-meta-item {
+      font-size: 9.5pt;
+    }
+    .cover-meta-item strong {
+      color: #1e293b;
+      display: block;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .avoid-break {
+      page-break-inside: avoid;
+    }
+
+    h1.section-header {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #0f172a;
+      padding-bottom: 8px;
+      border-bottom: 2.5px solid #2563eb;
+      margin-top: 28px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2.sub-header {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-left: 4px solid #7c3aed;
+      padding-left: 8px;
+    }
+
+    h3.item-header {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      color: #334155;
+      font-size: 10pt;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px 0;
+      font-size: 9pt;
+      page-break-inside: auto;
+    }
+
+    tr {
+      page-break-inside: avoid;
+      page-break-after: auto;
+    }
+
+    thead {
+      display: table-header-group;
+    }
+
+    th {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .tag-badge {
+      display: inline-block;
+      font-family: 'Fira Code', monospace;
+      font-size: 8.5pt;
+      font-weight: 600;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #bfdbfe;
+    }
+
+    .attr-badge {
+      display: inline-block;
+      font-family: 'Fira Code', monospace;
+      font-size: 8pt;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin: 1px;
+    }
+
+    .file-badge {
+      display: inline-block;
+      font-size: 7.5pt;
+      font-weight: 600;
+      background: #f3e8ff;
+      color: #6b21a8;
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin: 1px;
+    }
+
+    .fn-card {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      background: #ffffff;
+      page-break-inside: avoid;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .fn-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+
+    .fn-name {
+      font-family: 'Fira Code', monospace;
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    .fn-meta {
+      font-size: 8pt;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .fn-desc {
+      font-size: 9pt;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .fn-params {
+      font-size: 8.5pt;
+      color: #475569;
+      background: #f8fafc;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .code-snippet {
+      font-family: 'Fira Code', monospace;
+      font-size: 8pt;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin: 6px 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #334155;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    .viva-box {
+      background: #fefce8;
+      border: 1px solid #fef08a;
+      border-left: 4px solid #eab308;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      page-break-inside: avoid;
+    }
+
+    .viva-q {
+      font-weight: 700;
+      font-size: 9.5pt;
+      color: #854d0e;
+      margin-bottom: 4px;
+    }
+
+    .viva-a {
+      font-size: 9pt;
+      color: #713f12;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="cover-page">
+    <div class="cover-badge">College Viva & Project Reference Manual</div>
+    <div class="cover-title">NoteNest Portal<br>Complete Code Documentation</div>
+    <div class="cover-subtitle">Comprehensive Technical Catalog of all HTML5 Semantic Tags, CSS3 Design System Rules & Properties, and Vanilla JavaScript Functions used in the Project.</div>
+    
+    <div class="cover-meta-grid">
+      <div class="cover-meta-item">
+        <strong>Project Name</strong>
+        NoteNest - Students Notes Sharing Portal
+      </div>
+      <div class="cover-meta-item">
+        <strong>Technology Stack</strong>
+        Pure HTML5, CSS3, Vanilla JS (ES6+)
+      </div>
+      <div class="cover-meta-item">
+        <strong>Architecture</strong>
+        Multi-Page + Multi-Script + LocalStorage
+      </div>
+      <div class="cover-meta-item">
+        <strong>Target Frameworks</strong>
+        Zero External Libraries (100% Native)
+      </div>
+      <div class="cover-meta-item">
+        <strong>Total HTML Tags Used</strong>
+        48 Distinct HTML5 & SVG Elements
+      </div>
+      <div class="cover-meta-item">
+        <strong>Total CSS Properties</strong>
+        119 CSS3 Properties & 35 Custom Tokens
+      </div>
+      <div class="cover-meta-item">
+        <strong>Total JavaScript Functions</strong>
+        42 Modular & Documented Functions
+      </div>
+      <div class="cover-meta-item">
+        <strong>Responsive Support</strong>
+        Mobile (320px) to 4K Ultrawide (1440px+)
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS / SUMMARY -->
+  <div class="page-break"></div>
+  <h1 class="section-header">📑 Executive Summary & Architecture</h1>
+  <p>NoteNest is built from the ground up strictly according to pure web standards. It requires zero backend servers, zero build steps, and zero third-party UI toolkits. Every component, transition, responsive drawer, modal dialog, and data synchronization is handcrafted using native web APIs.</p>
+
+  <div style="margin: 16px 0;">
+    <span class="stat-pill">📄 6 HTML Pages</span>
+    <span class="stat-pill">⚡ 7 Modular JS Files</span>
+    <span class="stat-pill">🎨 1 Comprehensive CSS File (1,900+ Lines)</span>
+    <span class="stat-pill">💾 5 LocalStorage Entities</span>
+    <span class="stat-pill">📱 100% Mobile Responsive</span>
+  </div>
+
+  <h2 class="sub-header">📂 File Manifest Overview</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">File Name</th>
+        <th style="width: 15%;">Type</th>
+        <th style="width: 60%;">Primary Responsibility & Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>index.html</code> / <code>home.js</code></td>
+        <td>Landing Page</td>
+        <td>Hero section with search, animated category grid, dynamic trending notes counter, and feature walkthrough.</td>
+      </tr>
+      <tr>
+        <td><code>explore.html</code> / <code>explore.js</code></td>
+        <td>Explorer View</td>
+        <td>Multi-criteria filtering engine (Department, Semester, Subject, Note Type, Rating), search, sorting, and active filter chips.</td>
+      </tr>
+      <tr>
+        <td><code>upload.html</code> / <code>upload.js</code></td>
+        <td>Upload Portal</td>
+        <td>Drag-and-drop file upload dropzone simulation, real-time client-side validation, error messages, and immediate data publishing.</td>
+      </tr>
+      <tr>
+        <td><code>dashboard.html</code> / <code>dashboard.js</code></td>
+        <td>Student Dashboard</td>
+        <td>Real-time greeting, dynamic analytics metric recalculator, uploaded notes table with deletion, saved bookmarks, and recently viewed history.</td>
+      </tr>
+      <tr>
+        <td><code>profile.html</code> / <code>profile.js</code></td>
+        <td>Student Profile</td>
+        <td>Profile card, dynamic badge calculations, stats overview, "Edit Profile" modal dialog, and one-click demo data reset.</td>
+      </tr>
+      <tr>
+        <td><code>about.html</code> / <code>about.js</code></td>
+        <td>About Platform</td>
+        <td>Platform vision, mission pillars, architecture principles, and interactive collapsible FAQ accordion.</td>
+      </tr>
+      <tr>
+        <td><code>common.js</code></td>
+        <td>Shared Core Engine</td>
+        <td>Master data state, LocalStorage manager, Theme engine (Light/Dark), Auth simulation, Modals, Toast notifications, and PDF preview simulator.</td>
+      </tr>
+      <tr>
+        <td><code>style.css</code></td>
+        <td>Global Design System</td>
+        <td>CSS Custom Properties (:root variables), responsive fluid typography, glassmorphism, responsive grid & flexbox, off-canvas drawers, and animations.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 1: ALL HTML TAGS -->
+  <div class="page-break"></div>
+  <h1 class="section-header">🏷️ Section 1: Complete Catalog of HTML Tags Used</h1>
+  <p>The project uses <strong>48 semantic HTML5 and SVG vector tags</strong>. Below is the complete catalog with attributes, purpose, and usage in NoteNest.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 12%;">Tag</th>
+        <th style="width: 18%;">Category</th>
+        <th style="width: 25%;">Attributes Used</th>
+        <th style="width: 45%;">Role & Usage in NoteNest</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag-badge">&lt;html&gt;</span></td>
+        <td>Root Element</td>
+        <td><span class="attr-badge">lang="en"</span></td>
+        <td>Defines root document and declares English language for accessibility.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;head&gt;</span></td>
+        <td>Document Meta</td>
+        <td>None</td>
+        <td>Contains document metadata, title, viewport configuration, and stylesheet links.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;meta&gt;</span></td>
+        <td>Document Meta</td>
+        <td><span class="attr-badge">charset</span> <span class="attr-badge">name</span> <span class="attr-badge">content</span></td>
+        <td>Configures UTF-8 character encoding, responsive viewport width, and SEO descriptions.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;title&gt;</span></td>
+        <td>Document Meta</td>
+        <td>None</td>
+        <td>Sets the dynamic browser tab title for each individual page.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;link&gt;</span></td>
+        <td>Resource Link</td>
+        <td><span class="attr-badge">rel</span> <span class="attr-badge">href</span></td>
+        <td>Links the shared <code>style.css</code> and Google Fonts ('Plus Jakarta Sans' and 'Fira Code').</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;body&gt;</span></td>
+        <td>Document Body</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Main view container; receives the <code>dark-theme</code> class dynamically via JavaScript.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;header&gt;</span></td>
+        <td>Semantic Layout</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Sticky top navigation bar containing logo, nav links, global search trigger, theme toggle, and auth button.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;nav&gt;</span></td>
+        <td>Semantic Layout</td>
+        <td><span class="attr-badge">class</span> <span class="attr-badge">aria-label</span></td>
+        <td>Primary navigation container and mobile off-canvas drawer navigation.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;main&gt;</span></td>
+        <td>Semantic Layout</td>
+        <td><span class="attr-badge">class</span> <span class="attr-badge">id</span></td>
+        <td>Wraps the unique primary content for each page for accessibility and screen readers.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;section&gt;</span></td>
+        <td>Semantic Layout</td>
+        <td><span class="attr-badge">class</span> <span class="attr-badge">id</span></td>
+        <td>Divides pages into logical chunks: Hero, Categories, Trending, Filters, FAQs, and Dashboard Stats.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;aside&gt;</span></td>
+        <td>Semantic Layout</td>
+        <td><span class="attr-badge">class</span> <span class="attr-badge">id</span></td>
+        <td>Houses the filter sidebar on <code>explore.html</code> and off-canvas mobile filter drawer.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;footer&gt;</span></td>
+        <td>Semantic Layout</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Site-wide footer displaying brand tagline, quick links, category links, and copyright info.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;h1&gt;</span></td>
+        <td>Typography</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Page titles (e.g., "Your Notes. Your Community. Your Success." on Home, "Explore Study Notes").</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;h2&gt;</span></td>
+        <td>Typography</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Major section headings (e.g., "Popular Categories", "My Uploaded Notes", "Platform FAQs").</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;h3&gt;</span></td>
+        <td>Typography</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Card titles (Note titles, Feature card headings, Metric card labels, Modal titles).</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;h4&gt;</span></td>
+        <td>Typography</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Sidebar filter group titles (e.g., "Department", "Semester", "Minimum Rating").</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;p&gt;</span></td>
+        <td>Typography</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Paragraph descriptions, note descriptions, subtitle text, and form guidance copy.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;span&gt;</span></td>
+        <td>Inline Text</td>
+        <td><span class="attr-badge">class</span> <span class="attr-badge">id</span></td>
+        <td>Badges (PDF, Semester, Rating), counter values, uploader initials, and status indicators.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;strong&gt;</span></td>
+        <td>Inline Text</td>
+        <td>None</td>
+        <td>Emphasizes important terms, labels, and statistics values.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;small&gt;</span></td>
+        <td>Inline Text</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Field validation error messages (e.g., <code>.field-error</code>) and helper notes.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;kbd&gt;</span></td>
+        <td>Inline Text</td>
+        <td>None</td>
+        <td>Displays keyboard shortcuts in the search bar (e.g., <code>Ctrl + K</code>).</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;a&gt;</span></td>
+        <td>Hyperlink</td>
+        <td><span class="attr-badge">href</span> <span class="attr-badge">class</span> <span class="attr-badge">target</span></td>
+        <td>Navigation links, category cards with URL query parameters (e.g., <code>explore.html?dept=...</code>).</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;button&gt;</span></td>
+        <td>Interactive</td>
+        <td><span class="attr-badge">type</span> <span class="attr-badge">class</span> <span class="attr-badge">id</span> <span class="attr-badge">onclick</span></td>
+        <td>Triggers actions: bookmarking, downloads, modal open/close, tabs, theme toggles, and filters.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;form&gt;</span></td>
+        <td>Form Container</td>
+        <td><span class="attr-badge">id</span> <span class="attr-badge">class</span> <span class="attr-badge">novalidate</span></td>
+        <td>Upload notes form, login/signup form, and profile editor modal form.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;input&gt;</span></td>
+        <td>Form Input</td>
+        <td><span class="attr-badge">type</span> <span class="attr-badge">placeholder</span> <span class="attr-badge">required</span></td>
+        <td>Text search, file upload input (<code>type="file"</code>), radio buttons for rating, email & password.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;select&gt;</span></td>
+        <td>Form Select</td>
+        <td><span class="attr-badge">id</span> <span class="attr-badge">class</span> <span class="attr-badge">required</span></td>
+        <td>Dropdown pickers for Department, Semester, Note Type, Subject, and Sort Order.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;option&gt;</span></td>
+        <td>Form Option</td>
+        <td><span class="attr-badge">value</span> <span class="attr-badge">selected</span></td>
+        <td>Defines selectable choices within <code>&lt;select&gt;</code> elements.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;textarea&gt;</span></td>
+        <td>Form Textarea</td>
+        <td><span class="attr-badge">rows</span> <span class="attr-badge">placeholder</span></td>
+        <td>Multi-line inputs for note descriptions and user biography on profile.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;label&gt;</span></td>
+        <td>Form Label</td>
+        <td><span class="attr-badge">for</span> <span class="attr-badge">class</span></td>
+        <td>Accessible form field labels and custom styled radio/checkbox containers.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;table&gt;</span></td>
+        <td>Data Table</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Structures the "My Uploaded Notes" data grid in <code>dashboard.html</code>.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;thead&gt;</span></td>
+        <td>Data Table</td>
+        <td>None</td>
+        <td>Groups table header rows for columns: Note Title, Subject, Date, Downloads, Status, Actions.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;tbody&gt;</span></td>
+        <td>Data Table</td>
+        <td><span class="attr-badge">id</span></td>
+        <td>Dynamic target filled with note rows via <code>dashboard.js</code>.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;tr&gt;</span></td>
+        <td>Data Table</td>
+        <td>None</td>
+        <td>Defines rows inside table headers and dynamic table bodies.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;th&gt;</span></td>
+        <td>Data Table</td>
+        <td>None</td>
+        <td>Defines header cells with uppercase titles.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;ul&gt; / &lt;li&gt;</span></td>
+        <td>Lists</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Navigation link lists, footer links, notification drop lists, and upload guidelines.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;hr&gt;</span></td>
+        <td>Divider</td>
+        <td><span class="attr-badge">class</span></td>
+        <td>Semantic horizontal divider lines separating sections and modal footers.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;br&gt;</span></td>
+        <td>Line Break</td>
+        <td>None</td>
+        <td>Forces clean line breaks in hero banners and headers.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;div&gt;</span></td>
+        <td>Generic Box</td>
+        <td><span class="attr-badge">class</span> <span class="attr-badge">id</span></td>
+        <td>The core container for flexbox rows, grids, cards, badges, dropzones, modals, and toasts.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;svg&gt;</span></td>
+        <td>Vector Graphics</td>
+        <td><span class="attr-badge">viewBox</span> <span class="attr-badge">fill</span> <span class="attr-badge">stroke</span></td>
+        <td>Scalable crisp UI icons (Search, Moon, Sun, Bell, Download, Star, Filter, Close, Bookmark).</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;path&gt;</span></td>
+        <td>SVG Path</td>
+        <td><span class="attr-badge">d</span></td>
+        <td>Defines complex vector geometry for all custom UI icons.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;circle&gt;</span></td>
+        <td>SVG Shape</td>
+        <td><span class="attr-badge">cx</span> <span class="attr-badge">cy</span> <span class="attr-badge">r</span></td>
+        <td>Renders circular elements in notification bell badges and illustration icons.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;rect&gt;</span></td>
+        <td>SVG Shape</td>
+        <td><span class="attr-badge">x</span> <span class="attr-badge">y</span> <span class="attr-badge">width</span> <span class="attr-badge">rx</span></td>
+        <td>Renders file preview icons and badge backgrounds in SVG.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;polygon&gt; / &lt;polyline&gt;</span></td>
+        <td>SVG Shape</td>
+        <td><span class="attr-badge">points</span></td>
+        <td>Renders 5-star rating icons, checkmarks, and arrow chevrons.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;line&gt;</span></td>
+        <td>SVG Shape</td>
+        <td><span class="attr-badge">x1</span> <span class="attr-badge">y1</span> <span class="attr-badge">x2</span></td>
+        <td>Renders cross 'X' close buttons and decorative grid lines.</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge">&lt;script&gt;</span></td>
+        <td>Script Hook</td>
+        <td><span class="attr-badge">src</span> <span class="attr-badge">defer</span></td>
+        <td>Loads modular JavaScript logic (<code>common.js</code> and specific page scripts).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 2: ALL CSS PROPERTIES & DESIGN SYSTEM -->
+  <div class="page-break"></div>
+  <h1 class="section-header">🎨 Section 2: Complete CSS3 Architecture & Styling Properties</h1>
+  <p>The styling system is encapsulated entirely within <code>style.css</code>. It implements a modern <strong>Student-Tech Design System</strong> with CSS custom properties (variables), responsive layout primitives, fluid typography, smooth cubic-bezier transitions, and glassmorphism.</p>
+
+  <h2 class="sub-header">💎 CSS Variables & Design Tokens (:root)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Variable Name</th>
+        <th style="width: 35%;">Light Mode Value</th>
+        <th style="width: 40%;">Purpose & Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--primary</code></td>
+        <td><code>#2563eb</code> (Royal Blue)</td>
+        <td>Primary brand color for CTA buttons, active links, and primary accents.</td>
+      </tr>
+      <tr>
+        <td><code>--primary-hover</code></td>
+        <td><code>#1d4ed8</code> (Deep Blue)</td>
+        <td>Interactive hover state for buttons and clickable chips.</td>
+      </tr>
+      <tr>
+        <td><code>--primary-light</code></td>
+        <td><code>#eff6ff</code> (Ice Blue)</td>
+        <td>Light background tint for active badges, chips, and table hover states.</td>
+      </tr>
+      <tr>
+        <td><code>--secondary</code></td>
+        <td><code>#7c3aed</code> (Violet Purple)</td>
+        <td>Secondary accent used in category badges, gradients, and illustration accents.</td>
+      </tr>
+      <tr>
+        <td><code>--accent-orange</code></td>
+        <td><code>#f59e0b</code> (Amber Orange)</td>
+        <td>High-visibility badge for popular notes, stars rating, and hot tags.</td>
+      </tr>
+      <tr>
+        <td><code>--accent-green</code></td>
+        <td><code>#10b981</code> (Emerald Green)</td>
+        <td>Success toast notifications, verified student badges, and download icons.</td>
+      </tr>
+      <tr>
+        <td><code>--bg-body</code></td>
+        <td><code>#f8fafc</code> (Slate 50)</td>
+        <td>Main canvas background (switches to <code>#0b0f19</code> in Dark Theme).</td>
+      </tr>
+      <tr>
+        <td><code>--bg-card</code></td>
+        <td><code>#ffffff</code> (Pure White)</td>
+        <td>Elevated surface color for note cards, modals, and dropdowns.</td>
+      </tr>
+      <tr>
+        <td><code>--text-main</code></td>
+        <td><code>#0f172a</code> (Slate 900)</td>
+        <td>Primary high-contrast text for headers and strong elements.</td>
+      </tr>
+      <tr>
+        <td><code>--text-muted</code></td>
+        <td><code>#64748b</code> (Slate 500)</td>
+        <td>Subtitles, meta labels, timestamps, and placeholder text.</td>
+      </tr>
+      <tr>
+        <td><code>--border-color</code></td>
+        <td><code>#e2e8f0</code> (Slate 200)</td>
+        <td>Subtle 1px border lines for cards, tables, inputs, and dividers.</td>
+      </tr>
+      <tr>
+        <td><code>--shadow-sm/md/lg</code></td>
+        <td><code>0 1px 2px ... 0 20px 25px</code></td>
+        <td>Elevation layers providing realistic depth without heavy shadows.</td>
+      </tr>
+      <tr>
+        <td><code>--radius-md/lg/xl</code></td>
+        <td><code>8px / 12px / 20px</code></td>
+        <td>Rounded modern student-tech aesthetic for cards, inputs, and modals.</td>
+      </tr>
+      <tr>
+        <td><code>--transition</code></td>
+        <td><code>all 0.25s cubic-bezier(0.4, 0, 0.2, 1)</code></td>
+        <td>Silky smooth acceleration curves for transforms and color fades.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sub-header">📐 Complete Categorized List of CSS Properties Used</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 20%;">Category</th>
+        <th style="width: 40%;">Properties Implemented in <code>style.css</code></th>
+        <th style="width: 40%;">Technical Application in NoteNest</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Layout & Flexbox</strong></td>
+        <td><code>display</code>, <code>flex</code>, <code>flex-direction</code>, <code>flex-wrap</code>, <code>align-items</code>, <code>justify-content</code>, <code>gap</code>, <code>flex-grow</code>, <code>flex-shrink</code></td>
+        <td>Forms header bars, button groups, badge chips, modal footers, and aligned icon-label pairs.</td>
+      </tr>
+      <tr>
+        <td><strong>CSS Grid</strong></td>
+        <td><code>grid-template-columns</code>, <code>grid-template-rows</code>, <code>grid-gap</code>, <code>repeat()</code>, <code>minmax()</code>, <code>auto-fit</code>, <code>auto-fill</code></td>
+        <td>Responsive note card grids (1 to 3 columns auto-adapting) and category card matrices.</td>
+      </tr>
+      <tr>
+        <td><strong>Positioning & Depth</strong></td>
+        <td><code>position</code> (sticky, fixed, absolute, relative), <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>, <code>z-index</code>, <code>inset</code></td>
+        <td>Sticky navbar, fixed modal backdrop overlay (<code>z-index: 1000</code>), toast stacks, and badge pins.</td>
+      </tr>
+      <tr>
+        <td><strong>Box Model & Sizing</strong></td>
+        <td><code>width</code>, <code>height</code>, <code>min-width</code>, <code>max-width</code>, <code>min-height</code>, <code>max-height</code>, <code>margin</code>, <code>padding</code>, <code>box-sizing</code>, <code>overflow</code>, <code>overflow-y</code>, <code>overflow-x</code></td>
+        <td>Container constraints (<code>max-width: 1280px</code>), card padding, and scrollable modal bodies.</td>
+      </tr>
+      <tr>
+        <td><strong>Typography & Fonts</strong></td>
+        <td><code>font-family</code>, <code>font-size</code>, <code>font-weight</code>, <code>line-height</code>, <code>letter-spacing</code>, <code>text-align</code>, <code>text-transform</code>, <code>text-decoration</code>, <code>text-overflow</code>, <code>white-space</code>, <code>clamp()</code></td>
+        <td>Fluid heading sizes using <code>clamp(1.75rem, 4vw, 2.75rem)</code> and single-line ellipsis for long note titles.</td>
+      </tr>
+      <tr>
+        <td><strong>Colors & Backgrounds</strong></td>
+        <td><code>color</code>, <code>background</code>, <code>background-color</code>, <code>background-image</code>, <code>linear-gradient()</code>, <code>radial-gradient()</code>, <code>opacity</code></td>
+        <td>Modern gradient hero banners, badge colorations, and dark-theme contrast switches.</td>
+      </tr>
+      <tr>
+        <td><strong>Borders & Radius</strong></td>
+        <td><code>border</code>, <code>border-width</code>, <code>border-style</code>, <code>border-color</code>, <code>border-radius</code>, <code>border-top</code>, <code>border-bottom</code>, <code>outline</code>, <code>outline-offset</code></td>
+        <td>Rounded card aesthetics, focus rings for accessible tab navigation, and table dividers.</td>
+      </tr>
+      <tr>
+        <td><strong>Shadows & Glassmorphism</strong></td>
+        <td><code>box-shadow</code>, <code>text-shadow</code>, <code>backdrop-filter: blur()</code>, <code>-webkit-backdrop-filter</code></td>
+        <td>Glass-like sticky navigation bar with <code>blur(12px)</code> and floating card shadows.</td>
+      </tr>
+      <tr>
+        <td><strong>Transforms & Motion</strong></td>
+        <td><code>transform</code> (translate, translateY, scale), <code>transform-origin</code>, <code>transition</code>, <code>transition-property</code>, <code>transition-duration</code>, <code>transition-timing-function</code></td>
+        <td>Subtle <code>translateY(-4px)</code> hover lift effect on note cards and smooth modal pop-in animations.</td>
+      </tr>
+      <tr>
+        <td><strong>Keyframe Animations</strong></td>
+        <td><code>@keyframes</code>, <code>animation</code>, <code>animation-name</code>, <code>animation-duration</code>, <code>animation-timing-function</code>, <code>animation-fill-mode</code></td>
+        <td><code>modalFadeIn</code>, <code>toastSlideIn</code>, <code>pulseGlow</code>, and <code>shimmerLoading</code> animations.</td>
+      </tr>
+      <tr>
+        <td><strong>Interactive & Pseudo</strong></td>
+        <td><code>:hover</code>, <code>:focus</code>, <code>:focus-visible</code>, <code>:active</code>, <code>:disabled</code>, <code>:checked</code>, <code>:nth-child()</code>, <code>::placeholder</code>, <code>::before</code>, <code>::after</code>, <code>::selection</code></td>
+        <td>Input focus glow states, radio button custom icons, pseudo-element gradient badges.</td>
+      </tr>
+      <tr>
+        <td><strong>Responsive Breakpoints</strong></td>
+        <td><code>@media (max-width: 1024px)</code>, <code>@media (max-width: 768px)</code>, <code>@media (max-width: 480px)</code>, <code>@media print</code></td>
+        <td>Adaptive layouts converting sidebar into slide-in drawer and multi-column grids into single-column mobile views.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 3: ALL JAVASCRIPT FUNCTIONS -->
+  <div class="page-break"></div>
+  <h1 class="section-header">⚡ Section 3: Complete JavaScript Architecture & All Functions</h1>
+  <p>The application employs a pure Vanilla JavaScript ES6+ architecture. All data synchronizes through a unified client-side state manager and persistent <code>localStorage</code> database.</p>
+
+  <h2 class="sub-header">📦 1. common.js (Shared Foundation & Core System)</h2>
+  <p>Contains data models, initial seed notes, storage synchronization, theme management, modal controllers, and notification systems.</p>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">initCommon()</span>
+      <span class="fn-meta">Scope: Self-Invoking DOMReady</span>
+    </div>
+    <div class="fn-desc">Initializes the shared site-wide subsystem on every page load: attaches global event listeners, binds shortcuts (<kbd>Ctrl</kbd>+<kbd>K</kbd>), checks theme, and initializes auth UI.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">initDataStore()</span>
+      <span class="fn-meta">Scope: Core Storage Controller</span>
+    </div>
+    <div class="fn-desc">Checks <code>localStorage</code> for initial datasets (<code>notenest_notes</code>, <code>notenest_user</code>, <code>notenest_bookmarks</code>, <code>notenest_recent</code>). If empty, injects rich seed notes.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">initTheme()</span>
+      <span class="fn-meta">Scope: Theme Controller</span>
+    </div>
+    <div class="fn-desc">Reads user theme preference from <code>localStorage.getItem('notenest_theme')</code> or system preference. Toggles <code>dark-theme</code> class on <code>&lt;body&gt;</code>.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">toggleTheme()</span>
+      <span class="fn-meta">Scope: Exported (window.toggleTheme)</span>
+    </div>
+    <div class="fn-desc">Switches theme between Light and Dark mode, updates SVG icons (Sun/Moon), saves preference, and triggers notification.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">createNoteCardHTML(note)</span>
+      <span class="fn-meta">Scope: Global Component Generator</span>
+    </div>
+    <div class="fn-desc">Generates the complete responsive HTML template string for a Note Card, including subject badges, bookmark state, download counts, and preview triggers.</div>
+    <div class="fn-params">Parameters: <code>note (Object)</code> | Returns: <code>String (HTML)</code></div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">openNoteModal(noteId)</span>
+      <span class="fn-meta">Scope: Exported (window.openNoteModal)</span>
+    </div>
+    <div class="fn-desc">Finds note by ID, populates the multi-page preview modal with title, uploader info, tags, and paginated content, adds note to "Recently Viewed", and opens modal.</div>
+    <div class="fn-params">Parameters: <code>noteId (Number)</code> | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">toggleBookmark(noteId, event)</span>
+      <span class="fn-meta">Scope: Exported (window.toggleBookmark)</span>
+    </div>
+    <div class="fn-desc">Adds or removes note ID from <code>NoteNest.bookmarks</code> array, syncs to <code>localStorage</code>, fires toast, and notifies active page listeners via <code>window.onBookmarksUpdate</code>.</div>
+    <div class="fn-params">Parameters: <code>noteId (Number), e (Event)</code> | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">downloadNote(noteId, event)</span>
+      <span class="fn-meta">Scope: Exported (window.downloadNote)</span>
+    </div>
+    <div class="fn-desc">Simulates real file download: increments note download counter in state, triggers browser text file download via Blob URI, updates UI counters, and shows toast.</div>
+    <div class="fn-params">Parameters: <code>noteId (Number), e (Event)</code> | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">showToast(title, message, type)</span>
+      <span class="fn-meta">Scope: Exported (window.showToast)</span>
+    </div>
+    <div class="fn-desc">Dynamically mounts a self-dismissing toast notification card into the toast container with entrance and exit animations.</div>
+    <div class="fn-params">Parameters: <code>title (String), message (String), type (String: 'success'|'info'|'warning'|'error')</code> | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">openModal(modalEl) / closeModal(modalEl)</span>
+      <span class="fn-meta">Scope: Modal Dialog Controllers</span>
+    </div>
+    <div class="fn-desc">Handles opening/closing of modal backdrops with smooth transitions and locks body scroll.</div>
+    <div class="fn-params">Parameters: <code>modalEl (HTMLElement)</code> | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">setupNavbar() / setupDrawer()</span>
+      <span class="fn-meta">Scope: Responsive Navigation Handlers</span>
+    </div>
+    <div class="fn-desc">Controls mobile hamburger toggle button, off-canvas navigation slide-out drawer, and outside-click dismissal listeners.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">renderUserAuthSlot() / setupAuthModal()</span>
+      <span class="fn-meta">Scope: Simulated Auth Controllers</span>
+    </div>
+    <div class="fn-desc">Renders user login avatar dropdown in navbar or login button, handles login/signup form submissions, validates credentials, and syncs session state.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <!-- JS: PAGE SPECIFIC SCRIPTS -->
+  <div class="page-break"></div>
+  <h2 class="sub-header">📄 2. home.js (Landing Page Logic)</h2>
+  
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">initHomePage()</span>
+      <span class="fn-meta">Scope: DOMContentLoaded Listener</span>
+    </div>
+    <div class="fn-desc">Orchestrates home page rendering by invoking category counter calculator and trending notes generator.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">renderCategories()</span>
+      <span class="fn-meta">Scope: Component Renderer</span>
+    </div>
+    <div class="fn-desc">Iterates over department categories, computes real-time note count for each category, and renders clickable category cards linking to <code>explore.html?dept=...</code>.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">renderTrendingNotes()</span>
+      <span class="fn-meta">Scope: Component Renderer</span>
+    </div>
+    <div class="fn-desc">Sorts all notes by downloads descending (<code>[...NoteNest.notes].sort((a,b) => b.downloads - a.downloads)</code>) and displays top 3 cards in trending section.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <h2 class="sub-header">🔍 3. explore.js (Notes Explorer & Filtering Engine)</h2>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">initExplorePage()</span>
+      <span class="fn-meta">Scope: DOMContentLoaded Listener</span>
+    </div>
+    <div class="fn-desc">Parses URL search parameters (<code>dept</code>, <code>search</code>), populates subject dropdown options dynamically, binds input listeners, and triggers initial filter pipeline.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">applyFiltersAndRender()</span>
+      <span class="fn-meta">Scope: Core Filtering Engine</span>
+    </div>
+    <div class="fn-desc">Executes multi-criteria matching across: Search Query (title, subject, uploader, tags), Department, Semester, Note Type, Subject, and Minimum Rating. Sorts and renders resulting cards.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">renderActiveFilterChips()</span>
+      <span class="fn-meta">Scope: UI State Visualizer</span>
+    </div>
+    <div class="fn-desc">Constructs interactive removable filter chips for all currently active filter criteria above the results grid.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">resetAllFilters()</span>
+      <span class="fn-meta">Scope: Filter Reset Handler</span>
+    </div>
+    <div class="fn-desc">Clears all search inputs, resets dropdowns to "All", unchecks rating radios, and updates results grid.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">removeFilterChip(filterKey)</span>
+      <span class="fn-meta">Scope: Exported (window.app.removeFilterChip)</span>
+    </div>
+    <div class="fn-desc">Removes a single specific active filter when the user clicks its 'X' chip button and re-runs the filter pipeline.</div>
+    <div class="fn-params">Parameters: <code>filterKey (String)</code> | Returns: void</div>
+  </div>
+
+  <h2 class="sub-header">📤 4. upload.js (Notes Publishing & Dropzone Simulation)</h2>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">initUploadPage()</span>
+      <span class="fn-meta">Scope: DOMContentLoaded Listener</span>
+    </div>
+    <div class="fn-desc">Sets up drag-and-drop file dropzone listeners (<code>dragenter</code>, <code>dragover</code>, <code>dragleave</code>, <code>drop</code>), validates file input, and binds form submission.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">handleFileObject(file)</span>
+      <span class="fn-meta">Scope: Dropzone File Processor</span>
+    </div>
+    <div class="fn-desc">Validates file format (PDF, DOCX, PPTX, TXT, ZIP) and size (< 25MB), updates UI dropzone with file name and size badge.</div>
+    <div class="fn-params">Parameters: <code>file (File)</code> | Returns: <code>Boolean</code></div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">handleUploadSubmit(e)</span>
+      <span class="fn-meta">Scope: Form Submission Handler</span>
+    </div>
+    <div class="fn-desc">Validates all mandatory fields, generates new note object, prepends into <code>NoteNest.notes</code>, saves to <code>localStorage</code>, increments user uploads counter, and redirects to <code>explore.html</code>.</div>
+    <div class="fn-params">Parameters: <code>e (Event)</code> | Returns: void</div>
+  </div>
+
+  <div class="page-break"></div>
+  <h2 class="sub-header">📊 5. dashboard.js (Student Dashboard & Live Metrics)</h2>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">initDashboardPage()</span>
+      <span class="fn-meta">Scope: DOMContentLoaded Listener</span>
+    </div>
+    <div class="fn-desc">Computes time-of-day greeting (Morning / Afternoon / Evening), recalculates live analytics, populates tabs, and binds reactive update hooks.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">renderMetrics()</span>
+      <span class="fn-meta">Scope: Analytics Calculator</span>
+    </div>
+    <div class="fn-desc">Dynamically recalculates metric counter cards: Notes Uploaded, Total Downloads received, Saved Bookmarks count, and Profile Views.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">renderTabs()</span>
+      <span class="fn-meta">Scope: Tab Content Renderer</span>
+    </div>
+    <div class="fn-desc">Renders: 1. "My Uploaded Notes" interactive table, 2. "Saved Notes" grid, and 3. "Recently Viewed" historical notes stream.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">deleteMyNote(noteId)</span>
+      <span class="fn-meta">Scope: Exported (window.app.deleteMyNote)</span>
+    </div>
+    <div class="fn-desc">Deletes an uploaded note from state and <code>localStorage</code>, displays toast, and re-renders table and metric cards without page refresh.</div>
+    <div class="fn-params">Parameters: <code>noteId (Number)</code> | Returns: void</div>
+  </div>
+
+  <h2 class="sub-header">👤 6. profile.js & ❓ 7. about.js</h2>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">renderProfileDetails() (profile.js)</span>
+      <span class="fn-meta">Scope: Profile Data Binder</span>
+    </div>
+    <div class="fn-desc">Populates profile banner with avatar initials, student name, email, department, semester, college name, bio, badges, and upload statistics.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">setupProfileEditor() (profile.js)</span>
+      <span class="fn-meta">Scope: Modal Profile Editor</span>
+    </div>
+    <div class="fn-desc">Handles live profile editing in modal dialog: updates <code>NoteNest.user</code>, computes new avatar initials, syncs to <code>localStorage</code>, and notifies components.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-name">initAboutPage() (about.js)</span>
+      <span class="fn-meta">Scope: FAQ Accordion Controller</span>
+    </div>
+    <div class="fn-desc">Binds click events to FAQ accordion buttons to expand/collapse answer panels with smooth height transitions and rotates chevron icons.</div>
+    <div class="fn-params">Parameters: None | Returns: void</div>
+  </div>
+
+  <!-- SECTION 4: VIVA VOCE REFERENCE GUIDE -->
+  <div class="page-break"></div>
+  <h1 class="section-header">🎓 Section 4: College Viva-Voce Quick Reference Guide</h1>
+  <p>Essential questions and model answers to help explain this project during technical evaluations, lab exams, and viva presentations.</p>
+
+  <div class="viva-box">
+    <div class="viva-q">Q1: How does NoteNest achieve data persistence without a backend or MySQL database?</div>
+    <div class="viva-a"><strong>Answer:</strong> NoteNest utilizes the HTML5 <code>localStorage</code> Web Storage API. JSON-serialized datasets (<code>notenest_notes</code>, <code>notenest_user</code>, <code>notenest_bookmarks</code>, <code>notenest_recent</code>) are stored locally in the user's browser client. Any note uploads, bookmark toggles, profile edits, or theme switches are serialized with <code>JSON.stringify()</code> and retrieved with <code>JSON.parse()</code> upon page load.</div>
+  </div>
+
+  <div class="viva-box">
+    <div class="viva-q">Q2: How does the application filter notes across multiple criteria simultaneously?</div>
+    <div class="viva-a"><strong>Answer:</strong> The filtering engine in <code>explore.js</code> uses JavaScript's functional array pipeline (<code>Array.prototype.filter()</code> and <code>Array.prototype.sort()</code>). It evaluates multiple predicates sequentially: search query regex/string matching against title, subject, uploader, and tags; strict equality checks for Department, Semester, Note Type, and Subject; and numerical comparison for Minimum Rating.</div>
+  </div>
+
+  <div class="viva-box">
+    <div class="viva-q">Q3: How is responsive layout achieved across mobile, tablet, and desktop without Bootstrap or Tailwind?</div>
+    <div class="viva-a"><strong>Answer:</strong> Responsiveness is built using pure CSS3 Flexbox, CSS Grid with dynamic repeat formulas (<code>grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))</code>), and CSS Media Queries at <code>1024px</code>, <code>768px</code>, and <code>480px</code>. On smaller screens, the desktop filter sidebar automatically transforms into an off-canvas slide-out drawer triggered by JavaScript.</div>
+  </div>
+
+  <div class="viva-box">
+    <div class="viva-q">Q4: How do different pages communicate and share updated state?</div>
+    <div class="viva-a"><strong>Answer:</strong> All pages include the shared <code>common.js</code> module before their specific script. <code>common.js</code> manages the global <code>NoteNest</code> object and exports reactive hooks (<code>window.onBookmarksUpdate</code>, <code>window.onNotesUpdate</code>, <code>window.onUserUpdate</code>). When an action occurs on any page or modal, these hooks trigger automatic component re-rendering.</div>
+  </div>
+
+  <div class="viva-box">
+    <div class="viva-q">Q5: How is simulated file download implemented in pure JavaScript?</div>
+    <div class="viva-a"><strong>Answer:</strong> When a user clicks "Download Note", <code>downloadNote()</code> creates a temporary text Blob in memory using <code>new Blob([content], { type: 'text/plain' })</code>. It then creates a virtual <code>&lt;a&gt;</code> element, assigns <code>URL.createObjectURL(blob)</code> to its <code>href</code>, sets the <code>download</code> attribute to the note's filename, and programmatically triggers <code>a.click()</code> to initiate the browser download.</div>
+  </div>
+
+  <div style="margin-top: 30px; text-align: center; color: #64748b; font-size: 8.5pt;">
+    Generated for NoteNest College Project &bull; &copy; 2026 NoteNest Portal &bull; Pure HTML5, CSS3, & Vanilla JavaScript
+  </div>
+
+</body>
+</html>
