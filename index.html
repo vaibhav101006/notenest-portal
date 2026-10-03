@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteNest - Students Notes Sharing Portal</title>
+  <meta name="description" content="A modern digital library for college students to share, discover, and download high quality study notes.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body data-page="home">
+
+  <!-- App Wrapper -->
+  <div id="app" class="app-wrapper">
+
+    <!-- Top Announcement Banner -->
+    <aside class="top-announcement" aria-label="Announcement">
+      <div class="announcement-content">
+        <span class="badge-pill">Mid-Sem Special</span>
+        <span>🔥 Over 2,400+ verified semester notes & previous year papers updated for 2026!</span>
+      </div>
+      <button class="banner-close-btn" id="bannerCloseBtn" title="Close banner" aria-label="Close banner">&times;</button>
+    </aside>
+
+    <!-- Navigation Bar -->
+    <header class="navbar" id="navbar">
+      <div class="nav-container">
+        <!-- Brand Logo -->
+        <a href="index.html" class="brand-logo">
+          <div class="logo-icon-wrap">
+            <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              <path d="M9 7h6"></path>
+              <path d="M9 11h6"></path>
+              <path d="M9 15h4"></path>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">Note<span>Nest</span></span>
+            <span class="brand-sub">Campus Hub</span>
+          </div>
+        </a>
+
+        <!-- Global Search Bar in Header -->
+        <form class="header-search-bar" id="headerSearchForm" action="explore.html" method="GET">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" name="search" id="quickSearchInput" placeholder="Search subjects, notes, topics (Ctrl + K)..." autocomplete="off">
+          <kbd class="search-kbd">Ctrl K</kbd>
+        </form>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="nav-menu" id="navMenu">
+          <a href="index.html" class="nav-link active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            Home
+          </a>
+          <a href="explore.html" class="nav-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+            Explore Notes
+          </a>
+          <a href="upload.html" class="nav-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Upload
+          </a>
+          <a href="dashboard.html" class="nav-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+            Dashboard
+          </a>
+          <a href="about.html" class="nav-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            About
+          </a>
+        </nav>
+
+        <!-- Navbar Actions (Theme, Notifications, Auth/Profile) -->
+        <div class="nav-actions">
+          <!-- Dark Mode Toggle Button -->
+          <button class="icon-btn theme-toggle" id="themeToggleBtn" title="Switch Theme" aria-label="Switch Theme">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <!-- Notification Dropdown Toggle -->
+          <div class="dropdown-wrapper">
+            <button class="icon-btn notif-btn" id="notifBtn" title="Notifications" aria-label="Notifications">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span class="notif-badge" id="notifCount">3</span>
+            </button>
+            <div class="dropdown-menu notif-dropdown" id="notifDropdown">
+              <div class="dropdown-header">
+                <h4>Notifications</h4>
+                <button class="text-btn" id="markAllReadBtn">Clear All</button>
+              </div>
+              <ul class="notif-list" id="notifList">
+                <!-- Injected via JS -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- User Auth / Profile Pill -->
+          <div class="user-auth-slot" id="userAuthSlot">
+            <!-- Rendered by JS based on login state -->
+          </div>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-header">
+          <div class="brand-name">Note<span>Nest</span></div>
+          <button class="close-drawer-btn" id="closeDrawerBtn">&times;</button>
+        </div>
+        <div class="mobile-nav-links">
+          <a href="index.html" class="mobile-nav-item active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            Home
+          </a>
+          <a href="explore.html" class="mobile-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+            Explore Notes
+          </a>
+          <a href="upload.html" class="mobile-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Upload Notes
+          </a>
+          <a href="dashboard.html" class="mobile-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+            Dashboard
+          </a>
+          <a href="profile.html" class="mobile-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            My Profile
+          </a>
+          <a href="about.html" class="mobile-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            About NoteNest
+          </a>
+        </div>
+        <div class="mobile-drawer-footer" id="mobileDrawerFooter">
+          <!-- Auth buttons injected by JS -->
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Page Content: LANDING PAGE -->
+    <main class="main-content">
+      
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-bg-shapes">
+          <div class="shape shape-1"></div>
+          <div class="shape shape-2"></div>
+          <div class="shape shape-3"></div>
+        </div>
+        
+        <div class="container hero-container">
+          <div class="hero-content-col">
+            <div class="hero-pill-badge">
+              <span class="sparkle-icon">✨</span>
+              <span>The #1 Peer-to-Peer College Study Hub</span>
+            </div>
+            <h1 class="hero-title">
+              Your Notes. <br>
+              <span class="gradient-text">Your Community.</span> <br>
+              Your Success.
+            </h1>
+            <p class="hero-subtitle">
+              Find, share and organize study notes with students from your college.
+            </p>
+
+            <!-- Hero Search Form -->
+            <form class="hero-search-form" id="heroSearchForm" action="explore.html" method="GET">
+              <div class="hero-search-input-wrap">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" name="search" id="heroSearchInput" placeholder="Try 'Data Structures', 'Operating Systems', 'Calculus'...">
+              </div>
+              <button type="submit" class="btn btn-primary btn-hero-search">
+                <span>Search Notes</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </form>
+
+            <!-- Hero Action Buttons -->
+            <div class="hero-cta-group">
+              <a href="explore.html" class="btn btn-primary btn-lg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Explore Notes
+              </a>
+              <a href="upload.html" class="btn btn-secondary btn-lg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                Share Notes
+              </a>
+            </div>
+
+            <!-- Quick Stats Strip -->
+            <div class="hero-stats-strip">
+              <div class="stat-mini">
+                <span class="stat-number">1,250+</span>
+                <span class="stat-label">Verified Notes</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-mini">
+                <span class="stat-number">45,000+</span>
+                <span class="stat-label">Total Downloads</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-mini">
+                <span class="stat-number">4.9 ★</span>
+                <span class="stat-label">Student Rating</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Visual Graphics / Floating Interactive Cards -->
+          <div class="hero-visual-col">
+            <div class="floating-cards-wrapper">
+              
+              <!-- Main Featured Glass Card -->
+              <div class="floating-card hero-main-card">
+                <div class="card-header-mini">
+                  <span class="pill-badge pdf-badge">PDF • SEM 3</span>
+                  <span class="rating-pill">★ 4.9 (142 reviews)</span>
+                </div>
+                <h3 class="card-title-preview">Complete Data Structures & Algorithms Handcrafted Notes</h3>
+                <p class="card-desc-preview">Trees, Graphs, Dynamic Programming & Big-O cheat sheet with handwritten diagrams.</p>
+                <div class="card-uploader-preview">
+                  <div class="avatar-sm">RP</div>
+                  <div class="uploader-info-sm">
+                    <strong>Rahul Patel</strong>
+                    <span>Computer Engineering • Gold Contributor</span>
+                  </div>
+                </div>
+                <div class="card-footer-mini">
+                  <span class="dl-count"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> 348 Downloads</span>
+                  <button class="btn-micro" onclick="app.openNoteModal(1)">View Note</button>
+                </div>
+              </div>
+
+              <!-- Floating Accent Card 1 -->
+              <div class="floating-badge badge-top-right">
+                <div class="badge-icon-wrap green-glow">⚡</div>
+                <div class="badge-text-wrap">
+                  <strong>100% Free</strong>
+                  <span>No paywalls or subscriptions</span>
+                </div>
+              </div>
+
+              <!-- Floating Accent Card 2 -->
+              <div class="floating-badge badge-bottom-left">
+                <div class="badge-icon-wrap blue-glow">🎓</div>
+                <div class="badge-text-wrap">
+                  <strong>Syllabus Aligned</strong>
+                  <span>Semester 1 to 6 covered</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Popular Categories / Department Section -->
+      <section class="section categories-section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-tag">Departments</div>
+            <h2 class="section-title">Popular Categories</h2>
+            <p class="section-subtitle">Jump straight into your branch's curated collection of notes, question banks, and blueprints.</p>
+          </div>
+
+          <div class="categories-grid" id="categoriesGrid">
+            <!-- Dynamically populated via script.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured / Trending Notes Section -->
+      <section class="section trending-section">
+        <div class="container">
+          <div class="section-header-flex">
+            <div>
+              <div class="section-tag">High Rated</div>
+              <h2 class="section-title">Trending Student Notes 🔥</h2>
+              <p class="section-subtitle">Most downloaded and top rated study materials this week.</p>
+            </div>
+            <a href="explore.html" class="btn btn-outline">
+              View All Notes
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+
+          <div class="notes-grid" id="homeFeaturedNotesGrid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="section how-it-works-section">
+        <div class="container">
+          <div class="section-header text-center">
+            <div class="section-tag">Simple & Seamless</div>
+            <h2 class="section-title">How NoteNest Works</h2>
+            <p class="section-subtitle">Three easy steps to boost your exam scores and help your batchmates.</p>
+          </div>
+
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-num">01</div>
+              <div class="step-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </div>
+              <h3>Search & Filter</h3>
+              <p>Find precise notes by department, semester, subject, or material type in seconds.</p>
+            </div>
+
+            <div class="step-card highlight-step">
+              <div class="step-num">02</div>
+              <div class="step-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </div>
+              <h3>Preview & Download</h3>
+              <p>Preview document outlines, check community ratings, and download free sample PDFs instantly.</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">03</div>
+              <div class="step-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              </div>
+              <h3>Upload & Give Back</h3>
+              <p>Share your handwritten class notes, assignment solutions, and cheat sheets with fellow students.</p>
+            </div>
+          </div>
+
+          <!-- Call to action card -->
+          <div class="cta-banner-card">
+            <div class="cta-banner-content">
+              <h3>Have great notes from this semester?</h3>
+              <p>Help hundreds of students ace their exams. Upload your notes in under 60 seconds.</p>
+            </div>
+            <a href="upload.html" class="btn btn-primary btn-lg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Upload Your Notes Now
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-container">
+        <div class="footer-col footer-brand-col">
+          <a href="index.html" class="brand-logo">
+            <div class="logo-icon-wrap">
+              <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                <path d="M9 7h6"></path>
+                <path d="M9 11h6"></path>
+                <path d="M9 15h4"></path>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">Note<span>Nest</span></span>
+              <span class="brand-sub">Campus Hub</span>
+            </div>
+          </a>
+          <p class="footer-tagline">"Share knowledge. Learn together."</p>
+          <p class="footer-desc">The modern student portal designed to empower peer-to-peer academic success across all semesters.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html">Explore Notes</a></li>
+            <li><a href="upload.html">Upload Notes</a></li>
+            <li><a href="dashboard.html">Student Dashboard</a></li>
+            <li><a href="about.html">About NoteNest</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Departments</h4>
+          <ul class="footer-links">
+            <li><a href="explore.html?dept=Computer+Engineering">Computer Engineering</a></li>
+            <li><a href="explore.html?dept=Civil+Engineering">Civil Engineering</a></li>
+            <li><a href="explore.html?dept=Mechanical+Engineering">Mechanical Engineering</a></li>
+            <li><a href="explore.html?dept=Electrical+Engineering">Electrical Engineering</a></li>
+            <li><a href="explore.html?dept=BCA">BCA & BBA</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Campus Connect</h4>
+          <p class="footer-subtext">Join 15,000+ students on our campus exchange network.</p>
+          <div class="footer-badge-box">
+            <span class="pulse-dot"></span>
+            <span>Fall 2026 Semester Active</span>
+          </div>
+          <div class="footer-legal-links">
+            <a href="about.html">Privacy Guidelines</a>
+            <span>•</span>
+            <a href="about.html">Honor Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container footer-bottom-inner">
+          <p>© 2026 NoteNest. All rights reserved. Built with pure HTML, CSS & JavaScript for Students.</p>
+          <p class="footer-love">Crafted with <span>❤️</span> for College Classrooms</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Shared Note Details Modal -->
+  <div class="modal-backdrop" id="noteDetailsModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-header-meta">
+            <span class="pill-badge" id="modalNoteType">Lecture Notes</span>
+            <span class="badge-dept" id="modalNoteDept">Computer Engineering</span>
+          </div>
+          <button class="modal-close-btn" id="closeNoteModalBtn" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-note-hero">
+            <h2 class="modal-note-title" id="modalNoteTitle">Data Structures Complete Notes</h2>
+            <div class="modal-sub-details">
+              <span id="modalNoteSubject">Subject: Data Structures</span>
+              <span>•</span>
+              <span id="modalNoteSem">Semester 3</span>
+              <span>•</span>
+              <span id="modalNoteDate">Uploaded: 12 Jan 2026</span>
+            </div>
+          </div>
+          <div class="modal-meta-strip">
+            <div class="modal-meta-item">
+              <span class="m-label">Author / Uploader</span>
+              <strong id="modalNoteUploader">Rahul Patel</strong>
+            </div>
+            <div class="modal-meta-item">
+              <span class="m-label">Rating</span>
+              <strong class="text-warning" id="modalNoteRating">★ 4.8 / 5.0</strong>
+            </div>
+            <div class="modal-meta-item">
+              <span class="m-label">Downloads</span>
+              <strong id="modalNoteDownloads">125</strong>
+            </div>
+            <div class="modal-meta-item">
+              <span class="m-label">File Type / Size</span>
+              <strong id="modalNoteSize">PDF • 4.2 MB</strong>
+            </div>
+          </div>
+          <div class="modal-section">
+            <h4 class="modal-section-title">Description & Scope</h4>
+            <p class="modal-description-text" id="modalNoteDesc">Comprehensive handwritten notes covering arrays, linked lists, stacks, queues, trees, graphs, and dynamic programming with illustrated sample problems.</p>
+          </div>
+          <div class="modal-section">
+            <h4 class="modal-section-title">Key Topics & Tags</h4>
+            <div class="tags-cloud" id="modalNoteTags"></div>
+          </div>
+          <div class="modal-section preview-canvas-box">
+            <div class="preview-canvas-header">
+              <div class="preview-doc-title">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>Document Live Preview (Page <span id="previewPageNum">1</span> of 18)</span>
+              </div>
+              <div class="preview-controls">
+                <button class="preview-ctrl-btn" id="prevPageBtn" title="Previous Page">◀</button>
+                <button class="preview-ctrl-btn" id="nextPageBtn" title="Next Page">▶</button>
+              </div>
+            </div>
+            <div class="preview-sheet" id="previewSheet">
+              <div class="preview-sheet-watermark">NoteNest Verified</div>
+              <div class="preview-sheet-header">
+                <div class="ps-sub" id="previewSheetSubject">DATA STRUCTURES & ALGORITHMS</div>
+                <div class="ps-unit" id="previewSheetUnit">UNIT 1: ARRAYS, STACKS & QUEUES</div>
+              </div>
+              <hr class="ps-divider">
+              <div class="preview-sheet-body" id="previewSheetContent"></div>
+              <div class="preview-sheet-footer">
+                <span>Page <span id="previewFooterPage">1</span></span>
+                <span>NoteNest Student Network</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" id="modalBookmarkBtn">
+            <svg class="heart-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            <span id="modalBookmarkBtnText">Bookmark</span>
+          </button>
+          <div class="modal-footer-right">
+            <button class="btn btn-secondary" id="modalCloseBtn2">Close</button>
+            <button class="btn btn-primary" id="modalDownloadBtn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download Note (PDF)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Auth Modal -->
+  <div class="modal-backdrop" id="authModal" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="auth-modal-tabs">
+            <button class="auth-tab-toggle active" id="authTabLogin" data-auth-pane="login">Sign In</button>
+            <button class="auth-tab-toggle" id="authTabSignup" data-auth-pane="signup">Create Account</button>
+          </div>
+          <button class="modal-close-btn" id="closeAuthModalBtn" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="modal-body auth-modal-body">
+          <div class="auth-pane active" id="authPaneLogin">
+            <div class="auth-welcome">
+              <h3>Welcome Back! 👋</h3>
+              <p>Sign in to sync your bookmarks, downloads, and upload history.</p>
+            </div>
+            <div class="demo-quick-login">
+              <span>💡 College Demo:</span>
+              <button type="button" class="btn-micro" id="demoStudentLoginBtn">Auto-fill Student Account</button>
+            </div>
+            <form id="loginForm">
+              <div class="form-group">
+                <label for="loginEmail">Email Address</label>
+                <input type="email" id="loginEmail" placeholder="student@college.edu" required>
+              </div>
+              <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </form>
+          </div>
+          <div class="auth-pane" id="authPaneSignup">
+            <div class="auth-welcome">
+              <h3>Join NoteNest 🎓</h3>
+              <p>Access thousands of study notes uploaded by your university peers.</p>
+            </div>
+            <form id="signupForm">
+              <div class="form-group">
+                <label for="signupName">Full Name</label>
+                <input type="text" id="signupName" placeholder="e.g. Siddharth Sharma" required>
+              </div>
+              <div class="form-group">
+                <label for="signupEmail">College Email</label>
+                <input type="email" id="signupEmail" placeholder="e.g. siddharth@college.edu" required>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="signupDept">Department</label>
+                  <select id="signupDept" required>
+                    <option value="Computer Engineering">Computer Engineering</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BBA">BBA</option>
+                    <option value="Mathematics">Mathematics</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="signupSem">Semester</label>
+                  <select id="signupSem" required>
+                    <option value="Semester 1">Semester 1</option>
+                    <option value="Semester 2">Semester 2</option>
+                    <option value="Semester 3">Semester 3</option>
+                    <option value="Semester 4" selected>Semester 4</option>
+                    <option value="Semester 5">Semester 5</option>
+                    <option value="Semester 6">Semester 6</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="signupPassword">Create Password</label>
+                <input type="password" id="signupPassword" placeholder="At least 6 characters" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Create Student Profile</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="common.js"></script>
+  <script src="home.js"></script>
+</body>
+</html>
